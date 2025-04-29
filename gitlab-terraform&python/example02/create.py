@@ -3,8 +3,8 @@ import os
 import sys
 
 # Fetching AWS credentials from environment variables
-aws_access_key_id = os.getenv('AKIAUBKFB7BR7YNFUG6Q')
-aws_secret_access_key = os.getenv('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')
+aws_access_key_id = os.getenv('----------')
+aws_secret_access_key = os.getenv('--------------------')
 aws_region = 'us-east-1' #os.getenv('us-east-1')
 
 # Initialize boto3 ECS client
