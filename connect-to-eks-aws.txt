@@ -1,1 +1,1 @@
-aws eks --region us-east-1 update-kubeconfig --name my-eks-cluster
+aws eks --region us-east-1 update-kubeconfig --name my-eks-cluster 
