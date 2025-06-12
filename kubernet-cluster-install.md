@@ -6,7 +6,7 @@ Kubernetes is an open-source container orchestration system for automating softw
 
 ### Installation ✔️
 
-## 1. Disable Swap
+## 1. Disable Swap 
 
 Kubernetes schedules work based on the understanding of available resources. If workloads start using swap, it can become difficult for Kubernetes to make accurate scheduling decisions. Therefore, it’s recommended to disable swap before installing Kubernetes. Open the `/etc/fstab` file with a text editor. You can use nano, vim, or any other text editor you are comfortable
 with.
