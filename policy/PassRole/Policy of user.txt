@@ -21,7 +21,7 @@
         "sts:AssumeRole",
         "iam:PassRole" # ------> PassRole
       ],
-      "Resource": "arn:aws:iam::123456789012:role/MyS3AccessRole" # Role
+      "Resource": "arn:aws:iam::123456789012:role/MyS3AccessRole" # -----> Role
     }
   ]
 }
