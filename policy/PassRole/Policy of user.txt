@@ -19,7 +19,7 @@
       "Effect": "Allow",
       "Action": [
         "sts:AssumeRole",
-        "iam:PassRole"
+        "iam:PassRole" # ------> PassRole
       ],
       "Resource": "arn:aws:iam::123456789012:role/MyS3AccessRole" # Role
     }
