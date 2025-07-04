@@ -1,0 +1,13 @@
+{
+  "Effect": "Deny",
+  "Action": [
+    "ec2:CreateTags",
+    "ec2:DeleteTags"
+  ],
+  "Resource": "*",
+  "Condition": {
+    "StringNotEquals": {
+      "aws:PrincipalTag/Team": "DevOps"
+    }
+  }
+}
