@@ -6,7 +6,7 @@
       "Principal": {
         "AWS": "arn:aws:iam::123456789012:user/s3-user"
       },
-      "Action": "sts:AssumeRole"
+      "Action": "sts:AssumeRole" # ---> allow assume role for user
     }
   ]
 }
