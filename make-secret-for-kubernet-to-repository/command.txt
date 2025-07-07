@@ -1,0 +1,1 @@
+kubectl -n devops create secret docker-registry mysecret-nexus --docker-server="https://registry.m-khamisi.com" --docker-username=admin --docker-password="fz=NM92~Ttz)duw}5V" --docker-email=m_khamisi_2007@yahoo.com   

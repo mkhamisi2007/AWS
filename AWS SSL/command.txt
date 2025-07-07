@@ -1,0 +1,27 @@
+sudo apt update
+sudo apt install certbot
+sudo apt install python3-certbot-dns-route53
+---- create IAM user and Generate credential --------------
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ChangeResourceRecordSets",
+        "route53:ListResourceRecordSets",
+        "route53:GetChange",
+        "route53:ListHostedZones"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+
+--------------------------------
+export AWS_ACCESS_KEY_ID="your-access-key-id"
+export AWS_SECRET_ACCESS_KEY="your-secret-access-key"
+export AWS_DEFAULT_REGION="us-east-1"  # or your desired region
+----- port 80 open ----------------
+sudo certbot certonly --dns-route53 -d "*.m-khamisi.com" -d "m-khamisi.com"
+cp /etc/letsencrypt/live/m-khamisi.com/* .

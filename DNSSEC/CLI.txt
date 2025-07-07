@@ -1,0 +1,12 @@
+aws route53 list-hosted-zones
+
+aws route53 get-dnssec --hosted-zone-id Zxxxxxxxxxxx
+
+aws route53domains enable-domain-transfer-lock \
+  --domain-name xxxxxx.com
+
+aws route53domains associate-delegation-signer-to-domain \
+  --domain-name xxxxxx.com \
+  --signing-attributes Algorithm=13,Flags=257,PublicKey=<PUBLIC KEY>
+
+dig +dnssec xxxxxx.com

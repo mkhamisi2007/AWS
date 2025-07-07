@@ -1,0 +1,40 @@
+Amazon Linux 2 
+---
+yum update -y
+hostnamectl set-hostname nexus-server
+yum install wget -y
+amazon-linux-extras install java-openjdk11
+wget https://download.sonatype.com/nexus/3/nexus-3.69.0-02-java11-unix.tar.gz
+tar -xvf nexus-3.69.0-02-java11-unix.tar.gz
+mv nexus-3.69.0-02 nexus
+vi nexus/bin/nexus.rc  ==edit===> #run_as_user="nexus"
+useradd nexus
+chown -R nexus:nexus  /app/nexus
+chown -R nexus:nexus  /app/sonatype-work
+nano /etc/systemd/system/nexus.service
+---
+[Unit]
+Description=nexus service
+After=network.target
+
+[Service]
+Type=forking
+LimitNOFILE=65536
+User=nexus
+Group=nexus
+ExecStart=/app/nexus/bin/nexus start
+ExecStop=/app/nexus/bin/nexus stop
+User=nexus
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+---
+chkconfig nexus on
+systemctl enable nexus.service
+systemctl start nexus
+
+
+
+
+

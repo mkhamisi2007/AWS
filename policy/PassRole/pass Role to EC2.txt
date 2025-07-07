@@ -1,0 +1,6 @@
+aws ec2 run-instances \
+  --image-id ami-0abcdef1234567890 \
+  --instance-type t2.micro \
+  --iam-instance-profile Name=MyS3AccessRole \ # ----> Role
+  --key-name my-key \
+  --security-groups my-sg

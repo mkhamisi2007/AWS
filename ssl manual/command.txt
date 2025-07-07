@@ -1,0 +1,5 @@
+mkdir -p ~/nginx/ssl
+cd ~/nginx/ssl
+openssl genpkey -algorithm RSA -out nginx.key
+openssl req -new -key nginx.key -out nginx.csr
+openssl x509 -req -days 365 -in nginx.csr -signkey nginx.key -out nginx.crt 
