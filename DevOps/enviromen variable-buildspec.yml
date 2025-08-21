@@ -1,0 +1,22 @@
+version: 0.2
+
+env:
+  variables:
+    ENVIRONMENT: "Production"                  # Static
+  parameter-store:
+    DB_PASSWORD: "/myapp/prod/db_password"     # Dynamic from SSM
+  secrets-manager:
+    API_TOKEN: "prod/github:token"             # Dynamic from Secrets Manager
+
+phases:
+  build:
+    commands:
+      - echo "Environment = $ENVIRONMENT"
+      - echo "DB Password is retrieved from SSM"
+      - echo "API Token is retrieved from Secrets Manager"
+  pre-build:
+    commands:
+      - echo "Build ID: $CODEBUILD_BUILD_ID"
+      - echo "Build ARN: $CODEBUILD_BUILD_ARN"
+      - echo "Region: $AWS_DEFAULT_REGION"
+      - echo "Running on Image: $CODEBUILD_BUILD_IMAGE"
