@@ -15,8 +15,8 @@ phases:
       - echo "DB Password is retrieved from SSM"
       - echo "API Token is retrieved from Secrets Manager"
   pre-build:
-    commands:
-      - echo "Build ID: $CODEBUILD_BUILD_ID"
+    commands:           # default
+      - echo "Build ID: $CODEBUILD_BUILD_ID"   
       - echo "Build ARN: $CODEBUILD_BUILD_ARN"
       - echo "Region: $AWS_DEFAULT_REGION"
       - echo "Running on Image: $CODEBUILD_BUILD_IMAGE"
