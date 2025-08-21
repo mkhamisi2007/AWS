@@ -9,7 +9,7 @@
         "codebuild:BatchGetBuilds",
         "codebuild:BatchGetProjects"
       ],
-      "Resource": "arn:aws:codebuild:us-east-1:277707094115:project/my-build"
+      "Resource": "arn:aws:codebuild:us-east-1:11111111111:project/my-build"
     }
   ]
 }
