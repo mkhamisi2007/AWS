@@ -1,0 +1,51 @@
+version: 0.2
+
+env:
+  variables:
+    DOMAIN: first-domain
+    DOMAIN_OWNER: "277707094115"   # اگر ریپو در همین اکانت CodeBuild است، می‌تونی حذفش کنی
+    REPO: my-rep
+  # CodeBuild خودش AWS_REGION را ست می‌کند؛ اگر خواستی override کن.
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+      python: 3.11
+      java: corretto17
+    commands:
+      - echo "==> Login to CodeArtifact for npm"
+      - aws codeartifact login --tool npm --repository "$REPO" --domain "$DOMAIN" --domain-owner "$DOMAIN_OWNER" --region "$AWS_REGION"
+      - node -v && npm -v
+
+      - echo "==> Login to CodeArtifact for pip"
+      - TOKEN=$(aws codeartifact get-authorization-token --domain "$DOMAIN" --domain-owner "$DOMAIN_OWNER" --query authorizationToken --output text --region "$AWS_REGION")
+      - export PIP_INDEX_URL="https://aws:${TOKEN}@${DOMAIN}-${DOMAIN_OWNER}.d.codeartifact.${AWS_REGION}.amazonaws.com/pypi/${REPO}/simple/"
+      - python -V && pip -V
+
+      - echo "==> Login to CodeArtifact for Maven"
+      - aws codeartifact login --tool maven --repository "$REPO" --domain "$DOMAIN" --domain-owner "$DOMAIN_OWNER" --region "$AWS_REGION"
+      # این دستور settings.xml را در ~/.m2 تنظیم می‌کند
+
+      - echo "==> Login to CodeArtifact for NuGet"
+      - aws codeartifact login --tool nuget --repository "$REPO" --domain "$DOMAIN" --domain-owner "$DOMAIN_OWNER" --region "$AWS_REGION"
+
+  pre_build:
+    commands:
+      - echo "==> Installing JS deps from CodeArtifact"
+      - if [ -f package-lock.json ]; then npm ci; elif [ -f package.json ]; then npm install; fi
+
+      - echo "==> Installing Python deps from CodeArtifact"
+      - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+  build:
+    commands:
+      - echo "==> Build Java with Maven (using CodeArtifact repo)"
+      - if [ -f pom.xml ]; then mvn -B clean package; fi
+      - echo "==> Build .NET with NuGet (using CodeArtifact repo)"
+      - if ls *.sln >/dev/null 2>&1; then nuget restore; fi
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
