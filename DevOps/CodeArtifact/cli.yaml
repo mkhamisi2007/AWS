@@ -1,0 +1,2 @@
+aws codeartifact login --tool npm --repository my-rep --domain first-domain --region us-east-1
+npm install lodash
