@@ -1,0 +1,31 @@
+---
+schemaVersion: '2.2'
+description: Example - Using SSM Parameter Store and Secrets Manager
+parameters: {}
+mainSteps:
+  - name: GetPlainParameter
+    action: aws:runCommand
+    inputs:
+      DocumentName: "AWS-RunShellScript"
+      Parameters:
+        commands:
+          - "PLAIN_VALUE=$(aws ssm get-parameter --name /MyApp/Env --query 'Parameter.Value' --output text --region us-east-1)"
+          - "echo Plain Parameter Value is: $PLAIN_VALUE"
+
+  - name: GetSecureParameter
+    action: aws:runCommand
+    inputs:
+      DocumentName: "AWS-RunShellScript"
+      Parameters:
+        commands:
+          - "SECURE_VALUE=$(aws ssm get-parameter --name /MyApp/DBPassword --with-decryption --query 'Parameter.Value' --output text --region us-east-1)"
+          - "echo Retrieved SecureString Parameter (hidden for security)"
+
+  - name: GetSecretFromSecretsManager
+    action: aws:runCommand
+    inputs:
+      DocumentName: "AWS-RunShellScript"
+      Parameters:
+        commands:
+          - "SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id MyApp/Prod/DBSecret --query 'SecretString' --output text --region us-east-1)"
+          - "echo Retrieved Secret from Secrets Manager (hidden for security)"
