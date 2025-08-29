@@ -1,0 +1,4 @@
+aws lambda invoke \
+  --function-name MyAsyncFunction \
+  --payload '{"key":"value"}' \
+  --invocation-type Event
