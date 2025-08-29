@@ -1,0 +1,6 @@
+aws apigateway get-export \
+  --rest-api-id a1b2c3d4 \
+  --stage-name prod \
+  --export-type oas30 \
+  --parameters extensions='integrations' \
+  myapi.yaml
