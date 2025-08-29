@@ -1,0 +1,5 @@
+aws apigateway get-sdk \
+  --rest-api-id a1b2c3d4 \
+  --stage-name prod \
+  --sdk-type objectivec \
+  sdk-output.zip
