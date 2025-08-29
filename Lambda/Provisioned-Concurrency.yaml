@@ -1,0 +1,4 @@
+aws lambda put-provisioned-concurrency-config \
+  --function-name MyLambdaFunction \
+  --qualifier PROD \
+  --provisioned-concurrent-executions 5
