@@ -1,4 +1,4 @@
-aws codeartifact login --tool pip --repository pypi-store --domain my-domain --domain-owner 277707094115 --region us-east-1
+aws codeartifact login --tool pip --repository pypi-store --domain my-domain --domain-owner 277707094158 --region us-east-1
 
 --------------------------add layers in lambda  -------------------------
 REGION=us-east-1
