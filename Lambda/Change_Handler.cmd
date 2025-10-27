@@ -4,3 +4,6 @@ aws lambda update-function-configuration \
 
 ------------------------------------
 aws lambda get-function-configuration --function-name MyLambdaFunction --query "Handler"
+
+------------------------------------
+default =>  "lambda_function.lambda_handler"
