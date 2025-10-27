@@ -4,6 +4,7 @@ export USERNAME="mohammad.khamisi.etu@univ-lille.fr"
 SECRET_HASH=$(printf "%s" "$USERNAME$CLIENT_ID" | openssl dgst -sha256 -hmac "$CLIENT_SECRET" -binary | base64)
 echo "$SECRET_HASH"
 -----
+#-----in cognito => Sign in with username and password: ALLOW_USER_PASSWORD_AUTH
 aws cognito-idp initiate-auth \
   --region us-east-1 \
   --client-id "$CLIENT_ID" \
