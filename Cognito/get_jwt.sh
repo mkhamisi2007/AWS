@@ -9,5 +9,5 @@ aws cognito-idp initiate-auth \
   --client-id "$CLIENT_ID" \
   --auth-flow USER_PASSWORD_AUTH \
   --auth-parameters USERNAME="$USERNAME",PASSWORD='YourPasswordHere',SECRET_HASH="$SECRET_HASH"
----- out put ---------------------
+---- out put a JWT---------------------
  "AccessToken": "eyJraWQiOiI5UDBuMEpFMkczVkJFYXcr......
