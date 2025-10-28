@@ -1,0 +1,17 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Action": [
+                "ecs:ListContainerInstances",
+                "ecs:DescribeContainerInstances",
+                "ecs:DescribeClusters"
+            ],
+            "Resource": [
+                "arn:aws:ecs:us-east-1:888707094115:cluster/my-ecs-cluster"
+            ]
+        }
+    ]
+}
