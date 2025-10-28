@@ -18,3 +18,4 @@ sudo docker run --name ecs-agent --detach \
   --env-file=/etc/ecs/ecs.config \
   amazon/amazon-ecs-agent:latest
 
+aws ecs list-container-instances --cluster my-ecs-cluster
