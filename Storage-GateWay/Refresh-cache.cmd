@@ -1,6 +1,9 @@
 aws storagegateway refresh-cache \
   --file-share-arn arn:aws:storagegateway:us-east-1:123456789012:share/share-ABC123
-
+---------- OR ----------------------
+aws storagegateway update-nfs-file-share \
+  --file-share-arn arn:aws:storagegateway:us-east-1:123456789012:share/share-ABC123 \
+  --cache-refresh-interval-in-seconds 1800
 ------------ Or ---------------
 import os, boto3
 sg = boto3.client("storagegateway")
