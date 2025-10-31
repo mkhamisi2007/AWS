@@ -6,6 +6,9 @@ aws autoscaling put-lifecycle-hook \
   --notification-target-arn arn:aws:sns:us-east-1:123456789012:ASGTerminateTopic \
   --role-arn arn:aws:iam::123456789012:role/AutoScalingNotificationAccessRole \
   --heartbeat-timeout 300
+------------------ show hook info ---------------
+aws autoscaling describe-lifecycle-hooks \
+  --auto-scaling-group-name MyASG
 -------------------- Lammbda fuctioon for save Log to S3 ----------------------
 import boto3
 import os
