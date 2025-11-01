@@ -1,0 +1,11 @@
+aws cloudwatch put-metric-alarm \
+  --alarm-name "Recover-EC2-SystemCheck" \
+  --metric-name StatusCheckFailed_System \
+  --namespace AWS/EC2 \
+  --statistic Maximum \
+  --period 60 \
+  --threshold 1 \
+  --comparison-operator GreaterThanOrEqualToThreshold \
+  --dimensions Name=InstanceId,Value=i-0abc123def456gh78 \
+  --evaluation-periods 2 \
+  --alarm-actions arn:aws:automate:us-east-1:ec2:recover
