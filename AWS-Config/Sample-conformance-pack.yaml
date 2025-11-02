@@ -1,0 +1,8 @@
+Resources:
+  S3BucketVersioningRule:
+    Type: "AWS::Config::ConfigRule"
+    Properties:
+      ConfigRuleName: "s3-bucket-versioning-enabled"
+      Source:
+        Owner: AWS
+        SourceIdentifier: S3_BUCKET_VERSIONING_ENABLED
