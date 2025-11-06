@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Use an existing Lambda as a Custom Resource to ensure/enable Amazon GuardDuty
+
+Parameters:
+  ExistingEnableGuardDutyLambdaArn:
+    Type: String
+    Description: ARN لامبدایی که قبلاً ساخته‌ای و منطق Enable/Ensure GuardDuty را پیاده‌سازی می‌کند
+  EnableS3Protection:
+    Type: String
+    AllowedValues: ['true','false']
+    Default: 'true'
+    Description: فعال‌سازی S3 protection
+  EnableEKSAuditLogs:
+    Type: String
+    AllowedValues: ['true','false']
+    Default: 'true'
+    Description: فعال‌سازی EKS Audit Logs
+  EnableMalwareProtection:
+    Type: String
+    AllowedValues: ['true','false']
+    Default: 'true'
+    Description: فعال‌سازی Malware Protection (EBS Scan)
+  EnableRDSLoginAuditing:
+    Type: String
+    AllowedValues: ['true','false']
+    Default: 'false'
+    Description: فعال‌سازی RDS Login Logs (فقط ریجن‌های پشتیبانی‌شده)
+
+Resources:
+  EnableGuardDutyCustomResource:
+    Type: Custom::EnableGuardDuty
+    Properties:
+      ServiceToken: !Ref ExistingEnableGuardDutyLambdaArn
+
+      Config:
+        EnableS3Protection: !Ref EnableS3Protection
+        EnableEKSAuditLogs: !Ref EnableEKSAuditLogs
+        EnableMalwareProtection: !Ref EnableMalwareProtection
+        EnableRDSLoginAuditing: !Ref EnableRDSLoginAuditing
+
+Outputs:
+  DetectorId:
+    Description: شناسهٔ GuardDuty Detector در این ریجن
+    Value: !GetAtt EnableGuardDutyCustomResource.DetectorId
+  Region:
+    Description: ریجنی که عملیات در آن انجام شد
+    Value: !GetAtt EnableGuardDutyCustomResource.Region
+  Message:
+    Description: پیام نتیجه‌ی عملیات لامبدا
+    Value: !GetAtt EnableGuardDutyCustomResource.Message
