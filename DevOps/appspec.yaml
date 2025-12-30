@@ -95,3 +95,14 @@ Resources:
       Runtime: python3.11
       Handler: app.lambda_handler
       CodeUri: .
+----update liias to new version---#
+version: 0.0
+
+Resources:
+  - myLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: myLambdaFunction
+        Alias: myLambdaFunctionAlias
+        CurrentVersion: 1
+        TargetVersion: 2
