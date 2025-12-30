@@ -34,7 +34,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: taskdef.json
+        TaskDefinition: taskdef.json # OR ARN of TaskDefinition
         LoadBalancerInfo:
           ContainerName: app
           ContainerPort: 80
