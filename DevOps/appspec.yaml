@@ -78,7 +78,7 @@ Hooks:
   ]
 }
 -----------------------------------------------Lambda-----------------------------------------------
-# Lambda(use SAM)
+# Lambda(use SAM) 
 def lambda_handler(event, context):
     return {
         "statusCode": 200,
@@ -95,7 +95,7 @@ Resources:
       Runtime: python3.11
       Handler: app.lambda_handler
       CodeUri: .
-----update liias to new version---#
+----update liias to new version with Hook---#
 version: 0.0
 
 Resources:
@@ -106,3 +106,12 @@ Resources:
         Alias: myLambdaFunctionAlias
         CurrentVersion: 1
         TargetVersion: 2
+
+Hooks:
+  BeforeAllowTraffic:
+    - location: arn:aws:lambda:eu-west-1:123456789012:function:pre_traffic_check
+      timeout: 300
+
+  AfterAllowTraffic:
+    - location: arn:aws:lambda:eu-west-1:123456789012:function:post_traffic_check
+      timeout: 300
