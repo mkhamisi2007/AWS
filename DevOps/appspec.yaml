@@ -1,3 +1,4 @@
+#EC2-->
 version: 0.0
 os: linux
 
@@ -25,3 +26,14 @@ hooks:
     - location: scripts/health_check.sh
       timeout: 300
       runas: root
+-----------------------------------------------
+#ECS-->
+version: 1
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: taskdef.json
+        LoadBalancerInfo:
+          ContainerName: app
+          ContainerPort: 80
