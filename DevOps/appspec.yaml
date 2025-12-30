@@ -1,5 +1,5 @@
 -----------------------------------------------EC2-----------------------------------------------
-#EC2-->
+#EC2--> need Agent --- on-premis & EC2 --- Update : in-place & blue/green
 version: 0.0
 os: linux
 
@@ -29,13 +29,14 @@ hooks:
       runas: root
 -----------------------------------------------ECS-----------------------------------------------
 #ECS-->
+#appspect.yaml
 version: 1
 
 Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: taskdef.json
+        TaskDefinition: taskdef.json #---> Or ARN TaskDefinition
         LoadBalancerInfo:
           ContainerName: app
           ContainerPort: 80
@@ -46,7 +47,7 @@ Hooks:
 
   AfterAllowTraffic:
     - location: arn:aws:lambda:eu-west-1:123456789012:function:post_traffic_check
----# taskdef.json---
+---------# taskdef.json------
 {
   "family": "my-app-task",
   "networkMode": "awsvpc",
@@ -78,7 +79,7 @@ Hooks:
   ]
 }
 -----------------------------------------------Lambda-----------------------------------------------
-# Lambda(use SAM) 
+# Lambda(use SAM) ---> shift trafic between Alias(V1 -> V2) --- Update : Blue/Green ---
 def lambda_handler(event, context):
     return {
         "statusCode": 200,
@@ -95,7 +96,8 @@ Resources:
       Runtime: python3.11
       Handler: app.lambda_handler
       CodeUri: .
-----update liias to new version with Hook---#
+----update alias to new version with Hook---
+#appspect.yaml
 version: 0.0
 
 Resources:
