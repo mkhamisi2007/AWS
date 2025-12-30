@@ -1,5 +1,5 @@
 -----------------------------------------------EC2-----------------------------------------------
-#EC2--> need Agent --- on-premis & EC2 --- Update : in-place & blue/green
+#EC2--> need Agent --- on-premis & EC2 --- Update : in-place & blue/green(with ALB)
 version: 0.0
 os: linux
 
