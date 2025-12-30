@@ -1,3 +1,20 @@
+#--> AWS SAM automatically generates all required CloudFormation resources from one high-level definition.
+AWS::Serverless::Function
+│
+├── AWS::Lambda::Function
+│
+├── AWS::IAM::Role
+│
+├── AWS::ApiGateway::RestApi
+│
+├── AWS::ApiGateway::Method
+│
+├── AWS::Lambda::Permission
+│
+├── AWS::ApiGateway::Deployment
+│
+└── AWS::ApiGateway::Stage
+----------------------------------------------------------------------
 # first create 2 files below and then the 2 commands below in codebuild
 sam build
 sam deploy
@@ -51,7 +68,7 @@ phases:
           --stack-name sam-hello \
           --capabilities CAPABILITY_IAM \
           --region $AWS_DEFAULT_REGION
-
+--------------------------------------------------------------------------
 
 
   
