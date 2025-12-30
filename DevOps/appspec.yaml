@@ -28,7 +28,7 @@ hooks:
       timeout: 300
       runas: root
 -----------------------------------------------ECS-----------------------------------------------
-#ECS-->
+#ECS--> Update : Blue/Green --- ALB ---
 #appspect.yaml
 version: 1
 
@@ -97,7 +97,7 @@ Resources:
       Handler: app.lambda_handler
       CodeUri: .
 ----update alias to new version with Hook---
-#appspect.yaml
+#appspect.yaml with Hook
 version: 0.0
 
 Resources:
