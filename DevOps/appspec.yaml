@@ -30,14 +30,22 @@ hooks:
 -----------------------------------------------ECS-----------------------------------------------
 #ECS-->
 version: 1
+
 Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: taskdef.json # OR ARN of TaskDefinition
+        TaskDefinition: taskdef.json
         LoadBalancerInfo:
           ContainerName: app
           ContainerPort: 80
+
+Hooks:
+  BeforeInstall:
+    - location: arn:aws:lambda:eu-west-1:123456789012:function:pre_traffic_check
+
+  AfterAllowTraffic:
+    - location: arn:aws:lambda:eu-west-1:123456789012:function:post_traffic_check
 ---# taskdef.json---
 {
   "family": "my-app-task",
