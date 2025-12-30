@@ -1,0 +1,29 @@
+# first create 2 files below and then the 2 commands below
+sam build
+sam deploy
+-----------------------------------------------------------------
+# app.py
+def lambda_handler(event, context):
+    return {
+        "statusCode": 200,
+        "body": "Hello from SAM"
+    }
+-----------------------------------------------------------------
+#template.yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  HelloFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.11
+      Handler: app.lambda_handler
+      CodeUri: .
+      Events:
+        HelloApi:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+  
