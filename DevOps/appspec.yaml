@@ -1,3 +1,4 @@
+-----------------------------------------------EC2-----------------------------------------------
 #EC2-->
 version: 0.0
 os: linux
@@ -26,7 +27,7 @@ hooks:
     - location: scripts/health_check.sh
       timeout: 300
       runas: root
------------------------------------------------
+-----------------------------------------------ECS-----------------------------------------------
 #ECS-->
 version: 1
 Resources:
@@ -37,7 +38,38 @@ Resources:
         LoadBalancerInfo:
           ContainerName: app
           ContainerPort: 80
------------------------------------------------
+---# taskdef.json---
+{
+  "family": "my-app-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::123456789012:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "my-app",
+      "image": "123456789012.dkr.ecr.eu-west-1.amazonaws.com/my-app:latest",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/my-app",
+          "awslogs-region": "eu-west-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
+-----------------------------------------------Lambda-----------------------------------------------
 # Lambda(use SAM)
 def lambda_handler(event, context):
     return {
