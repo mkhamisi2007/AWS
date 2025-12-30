@@ -1,6 +1,10 @@
-# first create 2 files below and then the 2 commands below
+# first create 2 files below and then the 2 commands below in codebuild
 sam build
 sam deploy
+-----------------------------------------------------------------
+sam-hello/
+├── template.yaml
+└── app.py
 -----------------------------------------------------------------
 # app.py
 def lambda_handler(event, context):
@@ -9,7 +13,6 @@ def lambda_handler(event, context):
         "body": "Hello from SAM"
     }
 -----------------------------------------------------------------
-#template.yaml
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
@@ -26,4 +29,29 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+-------------------------------------------------------------------------
+#buildspec.yml
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - pip install --upgrade pip
+      - pip install aws-sam-cli
+
+  build:
+    commands:
+      - sam build
+
+  post_build:
+    commands:
+      - sam deploy --no-confirm-changeset --no-fail-on-empty-changeset \
+          --stack-name sam-hello \
+          --capabilities CAPABILITY_IAM \
+          --region $AWS_DEFAULT_REGION
+
+
+
   
