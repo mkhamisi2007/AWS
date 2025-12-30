@@ -37,3 +37,21 @@ Resources:
         LoadBalancerInfo:
           ContainerName: app
           ContainerPort: 80
+-----------------------------------------------
+# Lambda(use SAM)
+def lambda_handler(event, context):
+    return {
+        "statusCode": 200,
+        "body": "Hello from SAM"
+    }
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  HelloFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.11
+      Handler: app.lambda_handler
+      CodeUri: .
