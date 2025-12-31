@@ -1,2 +1,27 @@
+-----------------create domain------------------
+aws codeartifact create-domain \
+  --domain my-domain
+-----------------create repository------------------
+aws codeartifact create-repository \
+  --domain my-domain \
+  --repository my-repo
+-----------------create to external connection(maven)------------------
+aws codeartifact associate-external-connection \
+  --domain my-domain \
+  --repository my-repo \
+  --external-connection public:maven-central
+----------------------------- Login and install------------------------------------------
 aws codeartifact login --tool npm --repository my-rep --domain first-domain --region us-east-1
 npm install lodash
+-------------------Use it in buildspect.yaml------------------------------------
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - aws codeartifact login --tool npm --domain my-domain --repository my-repo
+  build:
+    commands:
+      - npm install
+      - npm run build
+
