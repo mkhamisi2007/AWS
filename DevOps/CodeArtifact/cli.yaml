@@ -9,7 +9,15 @@ AWS Account
                 ├── Maven Central
                 ├── npmjs
                 └── PyPI
-
+----------------------We can have a tree repo--------------------------
+CodeArtifact Domain
+└── Repository C
+    └── Upstream
+        └── Repository B
+            └── Upstream
+                └── Repository A
+                    ↑
+                 Developer (npm)
 -----------------create domain------------------
 aws codeartifact create-domain \
   --domain my-domain
