@@ -1,3 +1,15 @@
+AWS Account
+└── CodeArtifact
+    └── Domain (my-domain)
+        └── Repository (my-repo)
+            ├── Maven packages
+            ├── npm packages
+            ├── PyPI packages
+            └── Upstream (public repo)
+                ├── Maven Central
+                ├── npmjs
+                └── PyPI
+
 -----------------create domain------------------
 aws codeartifact create-domain \
   --domain my-domain
