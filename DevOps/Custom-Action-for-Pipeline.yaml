@@ -1,0 +1,33 @@
+-----------------------------action.json---------------------------------
+{
+  "category": "Build",
+  "provider": "OnPremCodeScan",
+  "version": "1",
+  "settings": {
+    "entityUrlTemplate": "https://onprem-scanner.local/jobs/{Config:ScanLevel}",
+    "executionUrlTemplate": "https://onprem-scanner.local/executions/{ExternalExecutionId}"
+  },
+  "configurationProperties": [
+    {
+      "name": "ScanLevel",
+      "required": true,
+      "key": true,
+      "secret": false,
+      "type": "String",
+      "description": "Scan level"
+    }
+  ],
+  "inputArtifactDetails": {
+    "minimumCount": 1,
+    "maximumCount": 1
+  },
+  "outputArtifactDetails": {
+    "minimumCount": 0,
+    "maximumCount": 0
+  }
+}
+------------------------------------------------------------------
+aws codepipeline create-custom-action-type `
+  --cli-input-json file://action.json `
+  --region us-east-1
+aws codepipeline list-action-types --action-owner-filter Custom --region us-east-1
