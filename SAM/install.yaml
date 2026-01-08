@@ -92,6 +92,8 @@ sam build
 sam deploy --guided
 
 --------------------------------------
+# see this folder for understand the integration and with codebuild & codedeploy
+----> lambda-codedeploy-demo
 --------------------------------------
 
 
