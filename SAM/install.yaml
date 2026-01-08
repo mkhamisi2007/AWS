@@ -89,7 +89,7 @@ cat template.yaml
             Value: !GetAtt HelloWorldFunctionRole.Arn
 --------------------------------------
 sam build
-
+sam deploy --guided
 
 --------------------------------------
 --------------------------------------
