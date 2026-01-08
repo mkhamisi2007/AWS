@@ -65,7 +65,7 @@ cat template.yaml
         Properties:
           CodeUri: hello_world/
           Handler: app.lambda_handler
-          Runtime: python3.14 #---> must be installed python version 3.14 in your client
+          Runtime: python3.14 #---> must be installed python version 3.14 in your client - OR - you can change it to your version
           Architectures:
             - x86_64
           Events:
@@ -88,6 +88,7 @@ cat template.yaml
             Description: "Implicit IAM Role created for Hello World function"
             Value: !GetAtt HelloWorldFunctionRole.Arn
 --------------------------------------
+sam build
 
 
 --------------------------------------
