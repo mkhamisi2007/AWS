@@ -111,6 +111,8 @@ sam local start-api
 # see the result on browser
 http://127.0.0.1:3000/hello
 
+# Or test it with file(event.json --> {}  --- that refer to "event" in [def lambda_handler(event, context):])
+sam local invoke HelloWorldFunction -e event.json
 
 
 
