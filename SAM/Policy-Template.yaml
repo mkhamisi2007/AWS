@@ -1,3 +1,19 @@
+| Policy Template                  | کاربرد ساده                       |
+| -------------------------------- | --------------------------------- |
+| **AWSLambdaBasicExecutionRole**  | نوشتن لاگ در CloudWatch           |
+| **S3ReadPolicy**                 | فقط خواندن از S3                  |
+| **S3CrudPolicy**                 | خواندن + نوشتن + حذف در S3        |
+| **DynamoDBReadPolicy**           | فقط خواندن از DynamoDB            |
+| **DynamoDBCrudPolicy**           | CRUD کامل روی DynamoDB            |
+| **SQSPollerPolicy**              | خواندن و حذف پیام از SQS          |
+| **SNSPublishMessagePolicy**      | ارسال پیام به SNS                 |
+| **SESPolicy**                    | ارسال ایمیل با SES                |
+| **VPCAccessPolicy**              | دسترسی Lambda به VPC              |
+| **CloudWatchPutMetricPolicy**    | ارسال Metric سفارشی به CloudWatch |
+| **EventBridgePutEventsPolicy**   | ارسال Event به EventBridge        |
+| **StepFunctionsExecutionPolicy** | اجرای State Machine               |
+
+---------------------------------------------------
 MyFunction:
   Type: AWS::Serverless::Function
   Properties:
