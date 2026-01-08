@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM + CodeDeploy demo (Alias, Canary, Alarms, Hooks)
+
+Globals:
+  Function:
+    Runtime: python3.11
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+
+  # --- Main Lambda (Production) ---
+  MyLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/main/
+      Handler: app.lambda_handler
+
+      # 1) Auto versioning + alias
+      AutoPublishAlias: live
+
+      # 2) Deploy strategy (CodeDeploy under the hood)
+      DeploymentPreference:
+        Type: Canary10Percent10Minutes
+
+        # 3) Rollback trigger alarms
+        Alarms:
+          - !Ref AliasErrorMetricGreaterThanZeroAlarm
+          - !Ref LatestVersionErrorMetricGreaterThanZeroAlarm
+
+        # 4) Hooks: tests before/after traffic shifting
+        Hooks:
+          PreTraffic: !Ref PreTrafficLambdaFunction
+          PostTraffic: !Ref PostTrafficLambdaFunction
+
+  # --- Pre-traffic validation Lambda ---
+  PreTrafficLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/hooks/
+      Handler: pre_traffic.lambda_handler
+
+  # --- Post-traffic validation Lambda ---
+  PostTrafficLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/hooks/
+      Handler: post_traffic.lambda_handler
+
+  # --- CloudWatch Alarms (examples) ---
+  # Alarm 1: If alias errors > 0
+  AliasErrorMetricGreaterThanZeroAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: "Rollback if LIVE alias has any errors"
+      Namespace: "AWS/Lambda"
+      MetricName: "Errors"
+      Statistic: "Sum"
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref MyLambdaFunction
+        - Name: Resource
+          Value: !Sub "${MyLambdaFunction}:live"
+
+  # Alarm 2: If the newly published version has errors > 0
+  LatestVersionErrorMetricGreaterThanZeroAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: "Rollback if new version has any errors"
+      Namespace: "AWS/Lambda"
+      MetricName: "Errors"
+      Statistic: "Sum"
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref MyLambdaFunction
+        - Name: ExecutedVersion
+          Value: !GetAtt MyLambdaFunction.Version
+
+Outputs:
+  FunctionName:
+    Value: !Ref MyLambdaFunction
+  LiveAlias:
+    Value: live
