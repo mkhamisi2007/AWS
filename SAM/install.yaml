@@ -1,0 +1,6 @@
+# linux
+pip install aws-sam-cli
+# Windows
+winget install Amazon.SAM-CLI
+
+sam --version
