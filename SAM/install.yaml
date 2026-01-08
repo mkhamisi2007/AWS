@@ -18,7 +18,7 @@ sam init
         4 - Multi-step workflow
         5 - Scheduled task
         6 - Standalone function
-        7 - Serverless API
+        7 - Serverless API ---> DaynamoDB
         8 - Infrastructure event management
         9 - Lambda Response Streaming
         10 - GraphQLApi Hello World Example
