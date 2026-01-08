@@ -1,13 +1,3 @@
-pip install awsebcli --upgrade --user
--------------------------
-py -m site --user-base
-C:\Users\Administrateur\AppData\Roaming\Python
-#add to envirment variable in path => C:\Users\Administrateur\AppData\Roaming\Python\Python314\Scripts\
---------------------------
-eb --version
-aws configure
-
---------------------------------------------------------------
 | دستور          | کاربرد                           |
 | -------------- | -------------------------------- |
 | `eb init`      | اتصال پروژه به Elastic Beanstalk |
@@ -21,4 +11,14 @@ aws configure
 | `eb config`    | تنظیمات Environment              |
 | `eb terminate` | حذف Environment                  |
 --------------------------------------------------------------
+
+pip install awsebcli --upgrade --user
+-------------------------
+py -m site --user-base
+C:\Users\Administrateur\AppData\Roaming\Python
+#add to envirment variable in path => C:\Users\Administrateur\AppData\Roaming\Python\Python314\Scripts\
+--------------------------
+eb --version
+aws configure
+
 
