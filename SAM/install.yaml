@@ -103,6 +103,9 @@ mkdir sam-local-demo
 cd sam-local-demo
 
 sam init
+# select 1 for test
+cd sam-app
+
 sam build
 sam local start-api
 
