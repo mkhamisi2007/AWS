@@ -27,6 +27,9 @@ cd python
 eb init
 eb create my-env
 
+eb terminate my-env
+
+
 # if we change code then 
 eb deploy
 
