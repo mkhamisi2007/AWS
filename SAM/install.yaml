@@ -4,3 +4,6 @@ pip install aws-sam-cli
 winget install Amazon.SAM-CLI
 
 sam --version
+aws configure
+
+sam init
