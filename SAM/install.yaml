@@ -45,6 +45,7 @@ cat samconfig.toml
     [default.build.parameters]
     cached = true
     parallel = true
+    ...
 --------------------------------------
 
 
