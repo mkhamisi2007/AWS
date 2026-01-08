@@ -94,7 +94,17 @@ sam delete
 --------------------------------------
 # see this folder for understand the integration and with codebuild & codedeploy
 ----> lambda-codedeploy-demo
---------------------------------------
+----------------Run it locally in Docker----------------------
+sam --version
+docker --version
+docker ps
+
+mkdir sam-local-demo
+cd sam-local-demo
+
+sam init
+sam build
+sam local start-api
 
 
 
