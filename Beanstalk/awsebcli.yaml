@@ -1,1 +1,16 @@
 pip install awsebcli --upgrade --user
+--------------------------------------------------------------
+| دستور          | کاربرد                           |
+| -------------- | -------------------------------- |
+| `eb init`      | اتصال پروژه به Elastic Beanstalk |
+| `eb create`    | ساخت Environment                 |
+| `eb deploy`    | Deploy نسخه جدید                 |
+| `eb status`    | وضعیت محیط                       |
+| `eb health`    | سلامت اپ                         |
+| `eb events`    | لاگ رویدادها                     |
+| `eb logs`      | لاگ EC2                          |
+| `eb open`      | باز کردن URL                     |
+| `eb config`    | تنظیمات Environment              |
+| `eb terminate` | حذف Environment                  |
+--------------------------------------------------------------
+
