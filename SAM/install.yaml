@@ -5,7 +5,7 @@ winget install Amazon.SAM-CLI
 
 sam --version
 aws configure
---------------------------------------------------
+--------------------------create basic sam structure------------------------
 sam init
     Which template source would you like to use?
             1 - AWS Quick Start Templates  ----->*
@@ -28,12 +28,23 @@ sam init
         14 - Multi-step workflow with Connectors
         15 - DynamoDB Example
         16 - Machine Learning
---------------------------------------
+----------------information about file that generated----------------------
 cd sam-app
 ls
     events  hello_world*  __init__.py  README.md  samconfig.toml  template.yaml  tests
 ls hello_world/
     app.py*  __init__.py  requirements.txt
+cat samconfig.toml 
+    # More information about the configuration file can be found here:
+    # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html
+    version = 0.1
+    
+    [default.global.parameters]
+    stack_name = "sam-app"
+    
+    [default.build.parameters]
+    cached = true
+    parallel = true
 --------------------------------------
 
 
