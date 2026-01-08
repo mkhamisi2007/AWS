@@ -5,5 +5,42 @@ winget install Amazon.SAM-CLI
 
 sam --version
 aws configure
-
+--------------------------------------------------
 sam init
+    Which template source would you like to use?
+            1 - AWS Quick Start Templates  ----->*
+            2 - Custom Template Location
+    1) Select 1 for test----->*
+    Choose an AWS Quick Start application template
+        1 - Hello World Example --->*
+        2 - Data processing
+        3 - Hello World Example with Powertools for AWS Lambda
+        4 - Multi-step workflow
+        5 - Scheduled task
+        6 - Standalone function
+        7 - Serverless API
+        8 - Infrastructure event management
+        9 - Lambda Response Streaming
+        10 - GraphQLApi Hello World Example
+        11 - Full Stack
+        12 - Lambda EFS example
+        13 - Serverless Connector Hello World Example
+        14 - Multi-step workflow with Connectors
+        15 - DynamoDB Example
+        16 - Machine Learning
+--------------------------------------
+cd sam-app
+ls
+    events  hello_world*  __init__.py  README.md  samconfig.toml  template.yaml  tests
+ls hello_world/
+    app.py*  __init__.py  requirements.txt
+--------------------------------------
+
+
+--------------------------------------
+--------------------------------------
+
+
+
+
+
