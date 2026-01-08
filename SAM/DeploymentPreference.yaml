@@ -1,3 +1,12 @@
+project/
+  template.yaml
+  src/
+    main/
+      app.py
+    hooks/
+      pre_traffic.py
+      post_traffic.py
+---------------------------------------------------
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: SAM + CodeDeploy demo (Alias, Canary, Alarms, Hooks)
