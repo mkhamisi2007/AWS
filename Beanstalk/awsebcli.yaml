@@ -11,7 +11,6 @@
 | `eb config`    | تنظیمات Environment              |
 | `eb terminate` | حذف Environment                  |
 --------------------------------------------------------------
-
 pip install awsebcli --upgrade --user
 -------------------------
 py -m site --user-base
@@ -20,5 +19,15 @@ C:\Users\Administrateur\AppData\Roaming\Python
 --------------------------
 eb --version
 aws configure
+---------------------------
+#first download template from this site => https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/tutorials.html
+unzip python.zip
+cd python
+----------------
+eb init
+eb create my-env
+
+# if we change code then 
+eb deploy
 
 
