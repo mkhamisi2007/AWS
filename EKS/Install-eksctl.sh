@@ -15,3 +15,5 @@ eksctl create cluster \
   --node-type t2.micro \
   --nodes 2
 
+kubectl get nodes
+
